@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=50%">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+  <title>Car Reservation</title>
+</head>
+<body>
+<div class="container">
+  <br>
+  <h2>Team 5 Rent-A-Car</h2>
+  <p><b>NOTE TO PROFESSOR</b><br>
+    From this page a user can:<ul>
+  <li>Can make a new car rental reservation</li>
+  <li><a href="/">CLICK HERE</a> to return to main car rental page</li></ul></p>
+  <div class="border border-danger p-4 w-50">
+    <form action="#" th:action="@{/reservation/new}"
+          method="post" class="needs-validation" novalidate>
+
+  <div class="form-group">
+    <label for="fName">First Name: </label>
+    <input type="text" id="fName" th:field="${carCustomer.fName}" class="form-control"
+           placeholder="Enter First Name" required>
+    <span th:if="${#fields.hasErrors('carCustomer.fName')}" th:errors="${carCustomer.fName}"> </span>
+    <div class="valid-feedback"></div>
+      <div class="invalid-feedback">Please fill out your first name.</div>
+  </div>
+
+  <div class="form-group">
+    <label for="lName">Last Name: </label>
+    <input type="text" id="lName" th:field="${carCustomer.lName}" class="form-control"
+           placeholder="Enter Last Name" required>
+    <span th:if="${#fields.hasErrors('carCustomer.lName')}" th:errors="${carCustomer.lName}"> </span>
+    <div class="valid-feedback"></div>
+      <div class="invalid-feedback">Please fill out your last name.</div>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email: </label>
+    <input type="email" id="email" th:field="${carCustomer.email}" class="form-control"
+           placeholder="Enter email" required>
+    <span th:if="${#fields.hasErrors('carCustomer.email')}" th:errors="${carCustomer.email}"> </span>
+    <div class="valid-feedback"></div>
+      <div class="invalid-feedback">Please provide a valid email.</div>
+  </div>
+
+  <label for="pickupLocation">Pick-Up Location:</label>
+  <select id="pickupLocation" th:field="${carReservation.pickupLocation}" class="form-control" required>
+    <option value="">Please select a Pick-Up city</option>
+    <option value="Honolulu">Honolulu</option>
+    <option value="Monterey">Monterey</option>
+    <option value="San Diego">San Diego</option>
+  </select>
+  <span th:if="${#fields.hasErrors('carReservation.pickupLocation')}" th:errors="*{carReservation.pickupLocation}"> </span>
+  <div class="valid-feedback"></div>
+  <div class="invalid-feedback">Please select a Pick-Up city from the list.</div><br>
+
+  <div class="form-group">
+    <label for="pickupDate">Pick-Up Date: </label>
+    <input type="text" id="pickupDate" th:field="${carReservation.pickupDate}" class="form-control datepicker" autocomplete="on" required>
+    <span th:if="${#fields.hasErrors('carReservation.pickupDate')}" th:errors="${carReservation.pickupDate}"> </span>
+    <div class="valid-feedback"></div>
+    <div class="invalid-feedback">Please provide your preferred drop-off date.</div>
+  </div>
+
+  <label for="returnLocation">Drop-Off Location:</label>
+  <select id="returnLocation" th:field="${carReservation.returnLocation}" class="form-control" required>
+    <option value="">Please select a Drop-Off city</option>
+    <option value="Honolulu">Honolulu</option>
+    <option value="Monterey">Monterey</option>
+    <option value="San Diego">San Diego</option>
+  </select>
+  <span th:if="${#fields.hasErrors('carReservation.returnLocation')}" th:errors="${carReservation.returnLocation}"> </span>
+  <div class="valid-feedback"></div>
+  <div class="invalid-feedback">Please select a Drop-Off city from the list.</div><br>
+
+
+  <div class="form-group">
+    <label for="returnDate">Drop-Off Date: </label>
+    <input type="text" id="returnDate" th:field="${carReservation.returnDate}" class="form-control datepicker" autocomplete="on" required>
+    <span th:if="${#fields.hasErrors('carReservation.returnDate')}" th:errors="${carReservation.returnDate}"> </span>
+    <div class="valid-feedback"></div>
+      <div class="invalid-feedback">Please provide your preferred drop-off date.</div>
+  </div>
+
+  <label for="type">Choose a Car Type:</label>
+    <select id="type" th:field="${carInfo.type}" class="form-control" required>
+      <option value="">Please select a car type</option>
+      <option value="SUV">SUV (6-8 people) $150.00/day</option>
+      <option value="Fullsize">Full-size (4-5 people) $125.00/day</option>
+      <option value="Economy">Economy (4 people) $110.00/day</option>
+      <option value="Compact">Compact (2 people) $5.00/day</option>
+    </select>
+      <span th:if="${#fields.hasErrors('carInfo.type')}" th:errors="${carInfo.type}"> </span>
+    <div class="valid-feedback"></div>
+    <div class="invalid-feedback">Please select your preferred car type from the list.</div><br>
+
+      <div id="summary">
+        <h3>Total: </h3>
+        <h3 id="total"></h3>
+        <input type="hidden" id="reservationTotal" th:field="${carReservation.total}"/>
+      </div>
+  <input type="submit" value="Submit" class="btn btn-danger">
+
+  <script>
+    // Disable form submissions if there are invalid fields
+    (function() {
+      'use strict';
+      window.addEventListener('load', function() {
+        // Get the forms we want to add validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function(form) {
+          form.addEventListener('submit', function(event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>
+
+  <script th:inline = "javascript" type="text/javascript">
+    $('.datepicker').datepicker({
+      startDate: new Date()
+    });
+
+    $(document).ready(function(){
+      $('#type, #pickupDate, #returnDate').on('change',function(){
+        if($("#pickupDate").val() == 0 || $("#returnDate").val() == 0|| $("#type").val() == 0) {
+          return;
+        }
+        let date1 = new Date($("#pickupDate").val());
+        let date2 = new Date($("#returnDate").val());
+        let Difference_In_Time = date2.getTime() - date1.getTime();
+        let Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+        let type = $("#type").val();
+        let cost = 0;
+        if (type == "SUV") {
+          cost = 150;
+        }else if(type == "Fullsize") {
+          cost = 125;
+        }else if(type == "Economy") {
+          cost = 110;
+        }else {
+          cost = 5;
+        }
+        let value = Difference_In_Days * cost;
+        if(value < 0)
+          return;
+        $("#summary").children("#total").text("$").append(value);
+        $("total").val(value);
+        document.getElementById('reservationTotal').value = value;
+      });
+    });
+  </script>
+
+</form>
+</div>
+  <footer class="py-5">
+    <div class="container">
+      <p class="m-0 text-center">CSUMB CST 438 Software Engineering Copyright &copy; 2020 Gonzalez, Houser, Pettit, Reed</p>
+      <p class="m-0 text-center"><b>Disclaimer:</b> The information on this webpage is fictitious. It is used for academic purposes only.</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+</body>
+</html>

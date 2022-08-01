@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=50%">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <title>Car Reservation Index</title>
+</head>
+<body>
+<div class="container">
+    <br>
+    <h2>Team 5 Rent-A-Car</h2>
+    <p><b>NOTE TO PROFESSOR</b><br>
+        From this page a user can:<ul>
+    <li>Cancel a reservation using their confirmation number</li>
+    <li><a href="/">CLICK HERE</a> to return to main car rental page</li></ul></p>
+    <div class="border border-danger p-4 w-50">
+        <form method="post">
+            <label for="customerID">Enter confirmation number to cancel</label><br>
+            <input type="number" id="customerID" name="customerID">
+            <input type="submit" value="Cancel Reservation" class="btn btn-danger">
+        </form>
+
+    </div>
+</div>
+<footer class="py-5">
+    <div class="container">
+        <p class="m-0 text-center">CSUMB CST 438 Software Engineering Copyright &copy; 2020 Gonzalez, Houser, Pettit, Reed</p>
+        <p class="m-0 text-center"><b>Disclaimer:</b> The information on this webpage is fictitious. It is used for academic purposes only.</p>
+    </div>
+    <!-- /.container -->
+</footer>
+</body>
+</html>
+

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=50%">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <title>Car Reservation Index</title>
+</head>
+<body>
+<div class="container">
+  <br>
+  <h2>Team 5 Rent-A-Car</h2><br>
+  <p><b>NOTE TO PROFESSOR</b><br>
+    From this page a user can:<ul>
+  <li>make a new car reservation, or</li>
+  <li>search for an existing reservation by entering the email address they used when
+    making their reservation.</li></ul></p>
+    <div class="border border-danger p-4 w-50">
+      <a href="/reservation/new" class="btn btn-danger"> New Car Reservation</a>
+    <br><br>
+      <form method="post">
+      <label for="email">Enter email to find your existing confirmation number </label><br>
+      <input type="email" id="email" name="email">
+      <input type="submit" value="Search" class="btn btn-danger">
+      </form>
+    </div>
+  <br>
+  <a href="#demo" class="btn btn-info" data-toggle="collapse">GRADING MENU: Click Here</a>
+  <div id="demo" class="collapse"><br>
+    <p><b>This menu provides navigation to certain functions of the rental car reservation system.</b></p>
+    <ul>
+      <li>See the JSON sent to the trip planner system for a findAll query <a href="/api/reservations">CLICK HERE</a></li>
+      <li>Cancel a reservation by confirmation number <a href="/reservation/cancel">CLICK HERE</a></li>
+    </ul>
+
+      <p><b>LISTED BELOW: Current List of Reservations in the Car Rental Database</b></p>
+    <table class="table">
+    <thead>
+<tr>
+  <th scope="col">Conf. #</th>
+  <th scope="col">Email</th>
+  <th scope="col">First Name</th>
+  <th scope="col">Last Name</th>
+  <th scope="col">Pick-Up Location</th>
+  <th scope="col">Pick-Up Date</th>
+  <th scope="col">Drop-Off Location</th>
+  <th scope="col">Drop-Off Date</th>
+  <th scope="col">Car Type</th>
+  <th></th>
+  <th scope="col">Total</th>
+</tr>
+</thead>
+  <tr th:each="reservations : ${reservationList}">
+    <td th:text="${reservations.reservationID}"></td>
+    <td th:text="${reservations.email}"></td>
+    <td th:text="${reservations.fName}"></td>
+    <td th:text="${reservations.lName}"></td>
+    <td th:text="${reservations.pickupLocation}"></td>
+    <td th:text="${reservations.pickupDate}"></td>
+    <td th:text="${reservations.returnLocation}"></td>
+    <td th:text="${reservations.returnDate}"></td>
+    <td th:text="${reservations.type}"></td>
+    <td>$</td>
+    <td th:text="${reservations.total}"></th></td>
+  </tr>
+  </table>
+</div>
+</div>
+<!-- Footer -->
+<br><br>
+<footer class="py-5">
+  <div class="container">
+    <p class="m-0 text-center">CSUMB CST 438 Software Engineering Copyright &copy; 2020 Gonzalez, Houser, Pettit, Reed</p>
+    <p class="m-0 text-center"><b>Disclaimer:</b> The information on this webpage is fictitious. It is used for academic purposes only.</p>
+  </div>
+  <!-- /.container -->
+</footer>
+</body>
+</html>
