@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+  <title>Person</title>
+</head>
+<body>
+<h2 th:inline="text">Hello [[${person.firstName}]] </h2>
+
+First name: <span th:inline="text"> [[${person.firstName}]] </span> <br />
+Last name: <span th:inline="text"> [[${person.lastName}]] </span> <br />
+Favorite food: <span th:inline="text"> [[${person.favoriteFood}]] </span> <br />
+
+</body>
+</html>

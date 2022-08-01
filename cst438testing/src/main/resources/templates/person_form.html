@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+  <title>Person form</title>
+</head>
+<body>
+<h2>Hello World.</h2>
+<form action="#" th:action="@{/person}" th:object="${person}" method="post">
+  First name: <input type="text" th:field="*{firstName}" />
+  <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"> </span> <br />
+  Last name: <input type="text" th:field="*{lastName}" />
+  <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"> </span> <br />
+  Favorite food: <input type="text" th:field="*{favoriteFood}" />
+  <span th:if="${#fields.hasErrors('favoriteFood')}" th:errors="*{favoriteFood}"> </span> <br />
+  <input type="submit" value="Submit" />
+</form>
+</body>
+</html>
